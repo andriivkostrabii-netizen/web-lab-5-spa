@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Практична робота № 5 — SPA на Vanilla JS</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Статична частина інтерфейсу: зберігає стан при навігації -->
+  <header class="site-header">
+    <div class="container header-content">
+      <div class="brand">
+        <h1>WebArch SPA</h1>
+        <span class="badge">Vanilla JS</span>
+      </div>
+
+      <!-- Індикатор глобального стану (State Monitor) -->
+      <div class="state-monitor" aria-label="Монітор стану сесії">
+        <div class="timer-widget">
+          <span class="status-dot"></span>
+          <span>Час сесії: <strong id="session-timer">00:00</strong></span>
+        </div>
+
+        <!-- Аудіоплеєр -->
+        <div class="audio-widget">
+          <audio id="bg-audio" controls preload="none">
+            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+            Ваш браузер не підтримує елемент audio.
+          </audio>
+        </div>
+      </div>
+    </div>
+
+    <!-- Глобальна навігаційна панель -->
+    <nav class="main-nav" id="main-nav" aria-label="Головна навігація">
+      <div class="container">
+        <ul class="nav-list">
+          <li>
+            <a href="#catalog" class="nav-link is-active" data-target="catalog">Каталог / Огляд</a>
+          </li>
+          <li>
+            <a href="#specs" class="nav-link" data-target="specs">Специфікація / Про проєкт</a>
+          </li>
+          <li>
+            <a href="#feedback" class="nav-link" data-target="feedback">Зворотний зв'язок</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Основний контент із секціями -->
+  <main class="container main-content">
+    
+    <!-- Секція 1: Активна за замовчуванням -->
+    <section id="catalog" class="page-section" aria-labelledby="title-catalog">
+      <h2 id="title-catalog">Каталог архітектурних рішень</h2>
+      <p class="lead">Огляд сучасних підходів до рендерингу веб-додатків.</p>
+      
+      <div class="cards-grid">
+        <article class="card">
+          <h3>MPA (Multi-Page Application)</h3>
+          <p>Класична модель: кожен перехід завантажує новий HTML-документ із сервера та скидає стан JS.</p>
+        </article>
+        <article class="card">
+          <h3>SPA (Single-Page Application)</h3>
+          <p>Клієнтський рендеринг: одноразове завантаження каркаса і динамічне перемикання секцій без перезавантаження.</p>
+        </article>
+        <article class="card">
+          <h3>SSR / SSG</h3>
+          <p>Гібридні стратегії: формування початкового HTML на сервері або під час збірки для швидкого FCP та SEO.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Секція 2: Прихована за замовчуванням -->
+    <section id="specs" class="page-section is-hidden" aria-labelledby="title-specs">
+      <h2 id="title-specs">Специфікація та архітектура проєкту</h2>
+      <p class="lead">Технічні вимоги, реалізовані у межах лабораторного стенду:</p>
+      
+      <ul class="spec-list">
+        <li><strong>Нуль залежностей:</strong> Використано чистий ECMAScript 6+ без фреймворків.</li>
+        <li><strong>Неперервність стану:</strong> Таймер у шапці та аудіопотік продовжують роботу під час переходів.</li>
+        <li><strong>Делегування подій:</strong> Обробник кліків встановлено на батьківський контейнер <code>&lt;nav&gt;</code>.</li>
+        <li><strong>Оптимізація мережі:</strong> Відсутні повторні запити <code>Doc</code> у DevTools Network при зміні розділів.</li>
+      </ul>
+    </section>
+
+    <!-- Секція 3: Прихована за замовчуванням -->
+    <section id="feedback" class="page-section is-hidden" aria-labelledby="title-feedback">
+      <h2 id="title-feedback">Форма зворотного зв'язку</h2>
+      <p class="lead">Введіть дані у форму та перейдіть на іншу вкладку — введені дані не зникнуть.</p>
+      
+      <form id="feedback-form" class="contact-form">
+        <div class="form-group">
+          <label for="user-name">Ваше ім'я:</label>
+          <input type="text" id="user-name" name="userName" placeholder="Іван Петренко" required>
+        </div>
+
+        <div class="form-group">
+          <label for="user-email">Електронна пошта:</label>
+          <input type="email" id="user-email" name="userEmail" placeholder="student@example.com" required>
+        </div>
+
+        <div class="form-group">
+          <label for="user-message">Повідомлення:</label>
+          <textarea id="user-message" name="userMessage" rows="4" placeholder="Ваш коментар щодо роботи SPA..." required></textarea>
+        </div>
+
+        <button type="submit" class="btn-primary">Надіслати повідомлення</button>
+        <p id="form-status" class="form-status" role="status"></p>
+      </form>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Практична робота № 5 • Дослідження SPA та MPA • 2026</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
